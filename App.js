@@ -6,7 +6,7 @@ export default function App() {
   console.log("app executed")
   return (
     <View style={styles.container}>
-      <Text>Go to class and get smart! 🤓</Text>
+      <Text>Go to class and get smart!!! 🤓</Text>
       <StatusBar style="auto" />
     </View>
   );
