@@ -1,22 +1,84 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TextInput,
+  ScrollView,
+} from "react-native";
 
 export default function App() {
-  let x = 1;
-  console.log("app executed")
+  const [enteredGoalText, setEnteredGoalText] = useState("");
+  const [courseGoals, setCourseGoals] = useState([]);
+
+  function goalInputHandler(enteredText) {
+    setEnteredGoalText(enteredText);
+  }
+
+  function addGoalHandler() {
+    setCourseGoals((currentCourseGoals) => [
+      ...currentCourseGoals,
+      enteredGoalText,
+    ]);
+  }
   return (
-    <View style={styles.container}>
-      <Text>Go to class and get smart!!! 🤓</Text>
-      <StatusBar style="auto" />
+    <View style={styles.appContainer}>
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Your course goal!"
+          onChangeText={goalInputHandler}
+        />
+        <Button title="Add Goal" onPress={addGoalHandler} />
+      </View>
+
+      <View style={styles.goalsContainer}>
+        <ScrollView alwaysBounceVertical={false}>
+          {courseGoals.map((goal) => (
+            <View style={styles.goalItem} key={goal}>
+              <Text style={styles.goalText}> {goal}</Text>
+            </View>
+          ))}
+        </ScrollView>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  appContainer: {
     flex: 1,
-    backgroundColor: 'green',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: 50,
+    paddingHorizontal: 16,
+  },
+  inputContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 24,
+    borderBottomWidth: 1,
+    borderBottomColor: "lightgray",
+  },
+  textInput: {
+    borderWidth: 1,
+    borderColor: "black",
+    width: "70%",
+    marginRight: 8,
+    padding: 8,
+  },
+  goalsContainer: {
+    flex: 5,
+  },
+  goalItem: {
+    fontSize: 32,
+    fontWeight: "bold",
+    margin: 8,
+    borderRadius: 6,
+    backgroundColor: "orange",
+  },
+  goalText: {
+    color: "Blue",
   },
 });
