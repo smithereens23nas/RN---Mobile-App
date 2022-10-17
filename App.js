@@ -29,7 +29,7 @@ export default function App() {
           renderItem={(itemData) => {xs
             itemData.index;
             return (
-              <GoalItem
+              <GoalItem 
                 text={itemData.item.text}
                 id={itemData.item.id}
                 onDeleteItem={deleteGoalHandler}
